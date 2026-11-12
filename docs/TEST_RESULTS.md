@@ -8,6 +8,7 @@ Run on 2026-11-12 in a Linux x86_64 cloud container (not real Kali hardware).
 | `mypy` (strict) | no issues in 23 files |
 | `pytest` on Python 3.12.3 | **128 passed**, coverage **92%** |
 | `pytest` on Python 3.13 | **128 passed** |
+| `pytest` on Python 3.14.6 | **128 passed** |
 | `scripts/install_kali.sh` (light) as a **non-root** user, Python 3.13 | installed into `.venv`; `doctor --offline` passed; `.env` created with mode 600 |
 | API smoke test (`numbertrace serve --demo` + curl) | `/health`, `/api/v1/normalize`, `/api/v1/providers` OK; foreign Host header → 400 |
 | UI smoke test (headless Chromium via Playwright) | investigation completes, provider status updates live, HTML report downloads, bulk input shows an error, no console errors, no horizontal scroll at 375 px; screenshots in `docs/screenshots/` |
