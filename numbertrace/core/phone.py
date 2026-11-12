@@ -101,6 +101,13 @@ def normalize(raw: str, default_region: str | None = "LK", max_variants: int = 4
     except NumberParseException as exc:
         raise PhoneInputError("Could not parse that number. Check the digits and the country code.") from exc
 
+    if text.startswith("+"):
+        digits_after_cc = re.sub(r"\D", "", text)[len(str(num.country_code)) :]
+        if digits_after_cc.startswith("0") and str(num.national_number) != digits_after_cc:
+            warnings.append(
+                f"Removed an extra '0' after +{num.country_code}. In international format the local "
+                "trunk '0' is dropped (e.g. +94 077... becomes +94 77...)."
+            )
     if not text.startswith("+"):
         warnings.append(
             f"Interpreted as a national number for region {region}. If the call came from "

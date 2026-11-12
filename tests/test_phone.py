@@ -125,3 +125,13 @@ def test_excessive_variants_rejected(bad):
 def test_input_is_masked_in_model():
     n = normalize("+94771234567", None)
     assert n.input_masked == "+94*******67"
+
+
+def test_extra_trunk_zero_after_country_code_is_removed_with_warning():
+    n = normalize("+940771234567", None)
+    assert n.e164 == "+94771234567"
+    assert any("extra '0'" in w for w in n.warnings)
+
+
+def test_no_trunk_warning_for_normal_international_input():
+    assert not any("extra '0'" in w for w in normalize("+94771234567", None).warnings)
