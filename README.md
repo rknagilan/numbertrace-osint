@@ -44,7 +44,7 @@ Problems: [docs/KALI_TROUBLESHOOTING.md](docs/KALI_TROUBLESHOOTING.md)
 sudo apt update && sudo apt install -y git python3 python3-venv
 ```
 ```bash
-git clone https://github.com/<your-github-username>/numbertrace-osint.git
+git clone https://github.com/rknagilan/numbertrace-osint.git
 ```
 ```bash
 cd numbertrace-osint

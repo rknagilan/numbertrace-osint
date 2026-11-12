@@ -59,7 +59,7 @@ sudo apt update && sudo apt install -y git python3 python3-venv
 cd ~
 ```
 ```bash
-git clone https://github.com/<your-github-username>/numbertrace-osint.git
+git clone https://github.com/rknagilan/numbertrace-osint.git
 ```
 ```bash
 cd numbertrace-osint

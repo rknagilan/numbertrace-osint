@@ -46,7 +46,7 @@ dev = [
 numbertrace = "numbertrace.cli:main"
 
 [project.urls]
-Documentation = "https://github.com/OWNER/numbertrace-osint/tree/main/docs"
+Documentation = "https://github.com/rknagilan/numbertrace-osint/tree/main/docs"
 
 [tool.hatch.build.targets.wheel]
 packages = ["numbertrace"]
