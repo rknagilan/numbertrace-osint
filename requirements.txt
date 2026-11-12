@@ -1,0 +1,6 @@
+# Minimal base runtime (light mode / CLI). Exact pins for reproducible installs.
+phonenumbers==9.0.43
+pydantic==2.14.3
+typer==0.29.1
+rich==15.0.0
+httpx==0.28.1

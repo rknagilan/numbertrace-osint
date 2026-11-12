@@ -1,0 +1,67 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: test (${{ matrix.os }}, py${{ matrix.python }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, ubuntu-24.04-arm, windows-latest, macos-latest]
+        python: ["3.12", "3.13"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - name: Install
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements-dev.txt
+          pip install -e . --no-deps
+      - name: Lint
+        run: ruff check numbertrace tests && ruff format --check numbertrace tests
+      - name: Type check
+        run: mypy
+      - name: Tests (no live network calls; all providers mocked)
+        run: pytest --cov=numbertrace --cov-report=term --cov-fail-under=85
+      - name: CLI smoke test (offline)
+        run: |
+          numbertrace --help
+          numbertrace normalize "+94771234567" --json
+          numbertrace --light inspect --number "+14155550100" --offline
+          numbertrace --light demo
+
+  kali:
+    name: Kali Linux container (light install via installer script)
+    runs-on: ubuntu-latest
+    container: kalilinux/kali-rolling
+    steps:
+      - name: System packages (container is root; real users need sudo)
+        run: apt-get update && apt-get install -y --no-install-recommends python3 python3-venv git ca-certificates
+      - uses: actions/checkout@v4
+      - name: Install with the documented script
+        run: |
+          useradd -m tester
+          chown -R tester .
+          su tester -c "bash scripts/install_kali.sh --dev"
+      - name: Doctor + tests as normal user
+        run: |
+          su tester -c ".venv/bin/numbertrace doctor --offline"
+          su tester -c ".venv/bin/pytest -q"
+          su tester -c ".venv/bin/numbertrace --light search --number '+14155550100' --offline --export"
+
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: docker build -t numbertrace .
+      - run: docker run --rm numbertrace numbertrace normalize "+94771234567"

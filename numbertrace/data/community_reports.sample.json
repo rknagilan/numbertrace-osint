@@ -1,0 +1,32 @@
+{
+  "dataset": "NumberTrace bundled SYNTHETIC sample",
+  "synthetic": true,
+  "license": "CC0-1.0",
+  "description": "Fictional reports for development and demo only. +1 415 555 01xx numbers are reserved for fictional use. Nothing here is real evidence about any person or business.",
+  "reports": [
+    {
+      "e164": "+14155550100",
+      "source": "synthetic-forum-a.example",
+      "category": "robocall",
+      "summary": "[SYNTHETIC] Pre-recorded message about a prize.",
+      "reported_at": "2026-01-10",
+      "report_count": 3
+    },
+    {
+      "e164": "+14155550100",
+      "source": "synthetic-forum-b.example",
+      "category": "scam_attempt",
+      "summary": "[SYNTHETIC] Caller asked for a bank OTP code.",
+      "reported_at": "2026-02-02",
+      "report_count": 4
+    },
+    {
+      "e164": "+14155550123",
+      "source": "synthetic-forum-a.example",
+      "category": "telemarketing",
+      "summary": "[SYNTHETIC] Single complaint about a sales call.",
+      "reported_at": "2026-03-15",
+      "report_count": 1
+    }
+  ]
+}

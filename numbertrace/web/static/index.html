@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>NumberTrace OSINT</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<header>
+  <h1>NumberTrace <span class="muted">OSINT</span></h1>
+  <button id="theme" type="button" aria-label="Toggle dark or light theme">Theme</button>
+</header>
+<main>
+  <p id="demo-banner" class="banner" hidden>DEMO MODE — every result shown is SYNTHETIC.</p>
+  <section class="card notice" aria-label="Ethical use notice">
+    <strong>Use responsibly.</strong> Investigate one number that called you. Results are
+    <em>unverified public references</em>, not identity. Social mentions never prove account ownership.
+    Nothing is stored unless you enabled local history.
+  </section>
+  <form id="form" class="card" autocomplete="off">
+    <label for="number">Phone number (one only)</label>
+    <input id="number" name="number" maxlength="32" required placeholder="+94 77 123 4567 (example)" inputmode="tel">
+    <div class="row">
+      <div>
+        <label for="country">Default country (for national format)</label>
+        <input id="country" name="country" maxlength="2" placeholder="LK" pattern="[A-Za-z]{2}">
+      </div>
+      <div class="check">
+        <input id="online" type="checkbox" checked>
+        <label for="online">Use configured online search APIs</label>
+      </div>
+    </div>
+    <div class="row">
+      <button id="go" type="submit">Investigate</button>
+      <button id="cancel" type="button" disabled>Cancel</button>
+    </div>
+  </form>
+  <div id="status" role="status" aria-live="polite"></div>
+  <section id="providers" hidden><h2>Provider status</h2><table><thead><tr><th>Provider</th><th>Status</th><th>Results</th><th>Note</th></tr></thead><tbody></tbody></table></section>
+  <section id="result" hidden></section>
+  <section id="history" class="card" hidden>
+    <h2>Local history</h2>
+    <p class="muted">Masked numbers only, stored on this computer.</p>
+    <button id="clear-history" type="button">Delete all history</button>
+  </section>
+</main>
+<footer class="muted">Local only (127.0.0.1). See PRIVACY.md and RESPONSIBLE_USE.md.</footer>
+<script src="/static/app.js"></script>
+</body>
+</html>
