@@ -111,7 +111,7 @@ def _print_investigation(inv: Investigation) -> None:
     _print_number(inv.number)
     pt = Table(title="Providers")
     for col in ("Provider", "Status", "Results", "Queries", "Note"):
-        pt.add_column(col)
+        pt.add_column(col, overflow="fold")
     for p in inv.providers:
         pt.add_row(p.name, p.state.value, str(p.result_count), str(p.queries_used), esc(p.message))
     c.print(pt)
@@ -284,7 +284,7 @@ def providers(as_json: Annotated[bool, typer.Option("--json")] = False) -> None:
         return
     t = Table(title="Providers")
     for col in ("Name", "Kind", "Configured", "Online", "Requires", "Notes"):
-        t.add_column(col)
+        t.add_column(col, overflow="fold")
     for i in infos:
         t.add_row(
             i.name,
