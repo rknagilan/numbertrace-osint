@@ -122,3 +122,9 @@ def test_doctor_hint_shows_extra_name(monkeypatch):
     monkeypatch.setattr(iu, "find_spec", lambda name, *a: None if name in ("fastapi", "uvicorn") else real(name, *a))
     r = runner.invoke(app, ["--light", "doctor", "--offline"])
     assert "pip install -e '.[web]'" in r.output
+
+
+def test_help_shows_extras_literally():
+    for args in (["--help"], ["serve", "--help"]):
+        out = runner.invoke(app, args).output
+        assert "'.[web]'" in out and "\\[web]" not in out

@@ -334,7 +334,7 @@ def serve(
     ] = False,
     demo: Annotated[bool, typer.Option("--demo", help="Use SYNTHETIC demo providers/data.")] = False,
 ) -> None:
-    """Start the optional local web dashboard (needs: pip install -e '.[web]')."""
+    """Start the optional local web dashboard (needs: pip install -e '.\\[web]')."""
     if host not in ("127.0.0.1", "localhost", "::1") and not allow_remote:
         err(
             "Refusing to bind a non-local address.",
